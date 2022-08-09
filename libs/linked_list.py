@@ -68,3 +68,46 @@ class SingleLinkedList(object):
         """
         for val in vals:
             self.add(val)
+
+
+class LinkedList(object):
+    """
+    双方向連結リスト
+    """
+
+    def add(self, val):
+        """
+        要素の追加
+        """
+        new_node = LinkedListNode(val)
+
+        if self.head is None:
+            self.head = self.tail = new_node
+            return
+
+        self.tail.nxt = new_node
+        new_node.prev = self.tail
+
+        self.tail = new_node
+
+    def __init__(self, vals: list):
+        """
+        コンストラクタ
+        """
+        self.head: LinkedListNode = None
+        self.tail: LinkedListNode = None
+
+        for val in vals:
+            self.add(val)
+
+    def get_vals(self) -> list:
+        """
+        全nodeのvalを取得
+        """
+        vals = []
+
+        node = self.head
+        while not(node is None):
+            vals.append(node.val)
+
+        return vals
