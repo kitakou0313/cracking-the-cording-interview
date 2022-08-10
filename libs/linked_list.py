@@ -100,6 +100,37 @@ class LinkedList(object):
         for val in vals:
             self.add(val)
 
+    def __iter__(self) -> LinkedListNode:
+        """
+        イテレータ
+        """
+        current_node = self.head
+
+        while not(current_node is None):
+            yield current_node
+            current_node = current_node.nxt
+
+    def remove_node(self, node: LinkedListNode):
+        """
+        nodeの削除
+        """
+        # head削除の時
+        if node.prev is None:
+            new_head = node.nxt
+
+            self.head = new_head
+            new_head.prev = None
+
+        # tail削除の時
+        elif node.nxt is None:
+            new_tail = node.prev
+
+            self.tail = new_tail
+            new_tail.nxt = None
+        else:
+            node.prev.nxt = node.nxt
+            node.nxt.prev = node.prev
+
     def get_vals(self) -> list:
         """
         全nodeのvalを取得
@@ -109,5 +140,6 @@ class LinkedList(object):
         node = self.head
         while not(node is None):
             vals.append(node.val)
+            node = node.nxt
 
         return vals
