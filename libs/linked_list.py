@@ -62,6 +62,12 @@ class SingleLinkedList(object):
 
         return val_list
 
+    def __len__(self):
+        """
+        全Valを返却
+        """
+        return len(self.get_vals())
+
     def add_multi_node(self, vals: list):
         """
         複数Nodeを同時に追加
