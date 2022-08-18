@@ -37,6 +37,12 @@ class IntStack():
         """
         return self.data[-1]
 
+    def is_empty(self) -> bool:
+        """
+        空か判定
+        """
+        return len(self.data) == 0
+
 
 class StackTest(unittest.TestCase):
     """
