@@ -45,6 +45,19 @@ class BinTreeNode(object):
         self.right_node = node
 
 
+def cal_bin_tree_height(root_node: BinTreeNode) -> int:
+    """
+    二分木の高さを返す rootを1とする
+    """
+    if root_node is None:
+        return 0
+
+    left_height = cal_bin_tree_height(root_node.get_left_node())
+    right_height = cal_bin_tree_height(root_node.get_right_node())
+
+    return 1 + max(left_height, right_height)
+
+
 class BinTreeTest(unittest.TestCase):
     """
     二分木のテスト
@@ -66,6 +79,27 @@ class BinTreeTest(unittest.TestCase):
 
         self.assertIsNone(root.get_left_node().get_left_node())
         self.assertIsNone(root.get_left_node().get_right_node())
+
+    def test_cal_tree_height(self):
+        """
+        cal_bin_tree_heightのtest
+        """
+        tree_height_1 = BinTreeNode(1)
+
+        self.assertEqual(cal_bin_tree_height(tree_height_1), 1)
+
+        tree_height_2 = BinTreeNode(1)
+        tree_height_2.set_left_node(BinTreeNode(2))
+        tree_height_2.set_right_node(BinTreeNode(3))
+
+        self.assertEqual(cal_bin_tree_height(tree_height_2), 2)
+
+        tree_height_3 = BinTreeNode(1)
+        tree_height_3.set_left_node(BinTreeNode(2))
+        tree_height_3.set_right_node(BinTreeNode(3))
+        tree_height_3.get_left_node().set_right_node(BinTreeNode(4))
+
+        self.assertEqual(cal_bin_tree_height(tree_height_3), 3)
 
 
 if __name__ == "__main__":
