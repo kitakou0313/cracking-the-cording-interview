@@ -1,5 +1,28 @@
+from logging import root
 import unittest
 from libs.tree import BinTreeNode
+
+
+class SearchRes(object):
+    """
+    BSTの探索結果
+    """
+
+    def __init__(self, is_bst, min_val, max_val):
+        """
+        docstring
+        """
+        self.is_bst = is_bst
+        self.min_val = min_val
+        self.max_val = max_val
+
+
+def is_BST_helper(root_node: BinTreeNode) -> SearchRes:
+    """
+    is_bstのhelper関数
+    """
+    is_having_left_tree = not(root_node.get_left_node() is None)
+    is_having_right_tree = not(root_node.get_right_node() is None)
 
 
 def is_BST(root_node: BinTreeNode) -> bool:
@@ -7,7 +30,7 @@ def is_BST(root_node: BinTreeNode) -> bool:
     二分探索木か判定
     再帰的に実装する
     """
-    pass
+    return is_BST_helper(root_node).is_bst
 
 
 class Test(unittest.TestCase):
