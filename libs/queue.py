@@ -31,6 +31,36 @@ class IntQueue(object):
         return len(self.data) == 0
 
 
+class TupleQueue(object):
+    """
+    Tuple用のQueue
+    """
+
+    def __init__(self):
+        """
+        コンストラクタ
+        """
+        self.data: list = []
+
+    def add(self, val: tuple):
+        """
+        追加
+        """
+        self.data.append(val)
+
+    def pop(self) -> tuple:
+        """
+        要素をFIFOで出す
+        """
+        return self.data.pop(0)
+
+    def is_empty(self) -> bool:
+        """
+        空か判定
+        """
+        return len(self.data) == 0
+
+
 class QueueTest(unittest.TestCase):
     """
     Queueのテスト
