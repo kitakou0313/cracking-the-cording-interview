@@ -42,12 +42,13 @@ def find_magic_index_with_bin_search(array: list) -> int:
 
 
 class Test(unittest.TestCase):
+    test_case = [
+        ([-11, 0, 2, 6, 7, 10], 2),
+        ([-11, -10, -9, 10, 11], NOT_FOUND)
+    ]
+
     def test1(self):
-        test_case = [
-            ([-11, 0, 2, 6, 7, 10], 2),
-            ([-11, -10, -9, 10, 11], NOT_FOUND)
-        ]
-        for input_case, excepted in test_case:
+        for input_case, excepted in self.test_case:
             self.assertEqual(find_magic_index(input_case), excepted)
 
     def test2(self):
@@ -55,7 +56,7 @@ class Test(unittest.TestCase):
             ([-11, 0, 2, 6, 7, 10], 2),
             ([-11, -10, -9, 10, 11], NOT_FOUND)
         ]
-        for input_case, excepted in test_case:
+        for input_case, excepted in self.test_case:
             self.assertEqual(
                 find_magic_index_with_bin_search(input_case), excepted)
 
