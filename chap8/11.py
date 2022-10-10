@@ -1,7 +1,7 @@
 import unittest
 
 
-def calculate_coins(value: int, coin: list) -> int:
+def calculate_coins(value: int, coins: list) -> int:
     """
     与えられたコインでの支払い方の総数を返す
     """
@@ -10,7 +10,7 @@ def calculate_coins(value: int, coin: list) -> int:
 
 class Test(unittest.TestCase):
     def test1(self):
-        testCases = [
+        test_cases = [
             (1, 1),
             (4, 1),
             (5, 2),
@@ -22,7 +22,7 @@ class Test(unittest.TestCase):
             1, 5, 10, 25
         ]
 
-        for value, expected in testCases:
+        for value, expected in test_cases:
             res = calculate_coins(value, coins)
             print(res)
             self.assertEqual(len(res), expected)
