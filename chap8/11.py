@@ -1,11 +1,29 @@
 import unittest
 
 
+def helper_func(value: int, coins: list, memo: dict) -> int:
+    """
+    メモ化した関数
+    """
+    res = 0
+    for coin in coins:
+        trg_val = value - coin
+        if trg_val < 0:
+            continue
+        res += memo[trg_val] if trg_val in memo else helper_func(
+            trg_val, coins, memo)
+
+    memo[value] = res
+    return res
+
+
 def calculate_coins(value: int, coins: list) -> int:
     """
     与えられたコインでの支払い方の総数を返す
     """
-    pass
+    memo = {}
+    memo[0] = 1
+    return helper_func(value, coins, memo)
 
 
 class Test(unittest.TestCase):
@@ -24,8 +42,7 @@ class Test(unittest.TestCase):
 
         for value, expected in test_cases:
             res = calculate_coins(value, coins)
-            print(res)
-            self.assertEqual(len(res), expected)
+            self.assertEqual(res, expected)
 
 
 if __name__ == "__main__":
