@@ -16,7 +16,22 @@ def search_highest_box_stacks(boxes: list[Box]) -> int:
     """
     docstring
     """
-    pass
+    def search_highest_with_box(bottom_box: Box, boxes: list[Box], memo: dict[Box, int]) -> int:
+        """
+        docstring
+        """
+        pass
+
+    memo: dict[Box, int] = {}
+
+    max_height = -1
+    for bottom_box in boxes:
+        res = memo[bottom_box] if bottom_box in boxes else search_highest_with_box(
+            bottom_box=bottom_box, boxes=boxes, memo=memo)
+        memo[bottom_box] = res
+        max_height = max(max_height, res)
+
+    return max_height
 
 
 class Test(unittest.TestCase):
