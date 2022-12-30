@@ -11,6 +11,12 @@ class Box(object):
         self.wi = wi
         self.di = di
 
+    def can_be_putted_on_box(self, box: 'Box'):
+        """
+        docstring
+        """
+        return (box.hi > self.hi) & (box.wi > self.wi) & (box.di > self.di)
+
 
 def search_highest_box_stacks(boxes: list[Box]) -> int:
     """
@@ -20,16 +26,21 @@ def search_highest_box_stacks(boxes: list[Box]) -> int:
         """
         docstring
         """
-        pass
+        max_height = bottom_box.hi
+        for next_box in boxes:
+            if next_box.can_be_putted_on_box(bottom_box):
+                max_height = max(
+                    max_height, bottom_box.hi + search_highest_with_box(next_box, boxes, memo))
+
+        memo[bottom_box] = max_height
+        return max_height
 
     memo: dict[Box, int] = {}
 
     max_height = -1
     for bottom_box in boxes:
-        res = memo[bottom_box] if bottom_box in boxes else search_highest_with_box(
-            bottom_box=bottom_box, boxes=boxes, memo=memo)
-        memo[bottom_box] = res
-        max_height = max(max_height, res)
+        max_height = max(max_height, search_highest_with_box(
+            bottom_box=bottom_box, boxes=boxes, memo=memo))
 
     return max_height
 
