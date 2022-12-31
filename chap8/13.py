@@ -26,11 +26,16 @@ def search_highest_box_stacks(boxes: list[Box]) -> int:
         """
         docstring
         """
+        if bottom_box in memo:
+            return memo[bottom_box]
+
         max_height = bottom_box.hi
         for next_box in boxes:
             if next_box.can_be_putted_on_box(bottom_box):
+                max_height_of_next_box = memo[next_box] if next_box in memo else search_highest_with_box(
+                    next_box, boxes, memo)
                 max_height = max(
-                    max_height, bottom_box.hi + search_highest_with_box(next_box, boxes, memo))
+                    max_height, bottom_box.hi + max_height_of_next_box)
 
         memo[bottom_box] = max_height
         return max_height
