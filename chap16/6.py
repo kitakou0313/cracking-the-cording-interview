@@ -10,6 +10,24 @@ def search_min_diff(list_a: list, list_b: list) -> int:
 
     min_diff = abs(sorted_list_a[0] - sorted_list_b[0])
 
+    end_ind_b = 0
+    for ind_a, val_a in enumerate(sorted_list_a):
+        lowest_diff_with_ind_a = float("inf")
+        prefer_step_diff = float("inf")
+        for ind_b in range(end_ind_b, len(sorted_list_b)):
+            diff = abs(val_a - sorted_list_b[ind_b])
+
+            if diff > prefer_step_diff:
+                end_ind_b = ind_b-1
+                break
+
+            if diff <= lowest_diff_with_ind_a:
+                lowest_diff_with_ind_a = diff
+
+            prefer_step_diff = diff
+
+        min_diff = min(min_diff, lowest_diff_with_ind_a)
+
     return min_diff
 
 
@@ -35,6 +53,7 @@ class Test(unittest.TestCase):
 
         for listA, listB, expected in test_cases:
             self.assertEqual(search_min_diff_bad(listA, listB), expected)
+            self.assertEqual(search_min_diff(listA, listB), expected)
 
 
 if __name__ == "__main__":
