@@ -13,7 +13,9 @@ def search_trg_num_in_rotated_array(array: list[int], trg_num: int):
         # 回転済みのケース
         # 二つのソート済み配列にできる
         # O(n) + O(logn)
-        pass
+        for ind, val in enumerate(array):
+            if val == trg_num:
+                trg_num_ind = ind
     else:
         # 回転されてないケース
         # 2分探索でOK
@@ -39,8 +41,8 @@ class Test(unittest.TestCase):
         ]
 
         for trg_num in test_cases:
-            # self.assertEqual(search_trg_num_in_rotated_array(
-            #     array=array, trg_num=trg_num), array.index(trg_num))
+            self.assertEqual(search_trg_num_in_rotated_array(
+                array=array, trg_num=trg_num), array.index(trg_num))
             self.assertEqual(search_trg_num_in_rotated_array(
                 array=not_rotated_array, trg_num=trg_num
             ), not_rotated_array.index(trg_num))
