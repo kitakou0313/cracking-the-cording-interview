@@ -27,7 +27,7 @@ class Test(unittest.TestCase):
     def test_group_anagrams(self):
         strings = ["cat", "bat", "rat", "arts", "tab", "tar", "car", "star"]
 
-        self.assertEqual(group_anagrams(sorted(strings)),
+        self.assertEqual(group_anagrams(strings),
                          ['arts', 'star', 'bat', 'tab', 'car', 'cat', 'rat', 'tar'])
 
 
