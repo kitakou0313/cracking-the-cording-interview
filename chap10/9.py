@@ -1,4 +1,5 @@
 import unittest
+import bisect
 
 
 def search_trgnum_pos_in_sorted_matrix(matrix: list[list[int]], trg_num: int) -> tuple[int]:
@@ -9,9 +10,12 @@ def search_trgnum_pos_in_sorted_matrix(matrix: list[list[int]], trg_num: int) ->
     R = len(matrix)
 
     for r in range(R):
-        for c in range(C):
-            if matrix[r][c] == trg_num:
-                return tuple([r, c])
+        if not (matrix[r][0] <= trg_num and trg_num <= matrix[r][-1]):
+            continue
+        trg_num_col = bisect.bisect_left(matrix[r], trg_num)
+        if matrix[r][trg_num_col] != trg_num:
+            continue
+        return (r, trg_num_col)
 
 
 class Test(unittest.TestCase):
